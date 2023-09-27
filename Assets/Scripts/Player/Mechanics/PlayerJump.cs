@@ -20,6 +20,11 @@ public class PlayerJump : MonoBehaviour, IJump
     /// <summary>
     /// Makes the player jump with the physics engine based on the jump force.
     /// </summary>
+
+    public void Initialize(Rigidbody rigidbody)
+    {
+        _rb = rigidbody;
+    }
     public void Jump()
     {
         if (_grounded.Grounded)

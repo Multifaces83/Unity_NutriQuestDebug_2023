@@ -26,10 +26,24 @@ public class PlayerMovement : MonoBehaviour, IMove
         _movement = movement;
     }
 
+    // private void FixedUpdate()
+    // {
+    //     _rb.velocity = new Vector3(_movement.x * _speed, 0, _movement.y * _speed);
+    //     _rb.position = new Vector3(_rb.position.x, _rb.position.y, _rb.position.z);
+    //     _animations.Move(_movement.sqrMagnitude);
+
+    //     // Rotate the player to the direction of _movement
+    //     if (_movement != Vector2.zero)
+    //     {
+    //         _rb.rotation = Quaternion.LookRotation(new Vector3(_movement.x, 0f, _movement.y));
+    //     }
+    // }
+
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector3(_movement.x * _speed, 0, _movement.y * _speed);
-        _rb.position = new Vector3(_rb.position.x, 1, _rb.position.z);
+        // bug 2 + reset physics defaults(gravity) what was the point of this excercise?
+        _rb.velocity = new Vector3(_movement.x * _speed, _rb.velocity.y, _movement.y * _speed);
+        _rb.position = new Vector3(_rb.position.x, _rb.position.y, _rb.position.z);
         _animations.Move(_movement.sqrMagnitude);
 
         // Rotate the player to the direction of _movement

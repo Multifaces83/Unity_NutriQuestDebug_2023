@@ -6,19 +6,21 @@ using UnityEngine.TestTools;
 using NSubstitute;
 public class PlayerJumpTests
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void PlayerJumpTestsSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
     public IEnumerator PlayerJumpTestsWithEnumeratorPasses()
     {
+        GameObject go = new GameObject();
+        PlayerJump jump = go.AddComponent<PlayerJump>();
 
-        yield return new WaitForSeconds(0.1f);
+        Rigidbody rb = go.AddComponent<Rigidbody>();
+        IGrounded grounded = Substitute.For<IGrounded>();
+        grounded.Grounded.Returns(true);
+        jump.Initialize(rb);
+        jump.Jump();
+
+        yield return new WaitForSeconds(0.2f);
+        Assert.IsTrue(rb.velocity.y > 0);
+        Assert.Greater(rb.velocity.y, 0);
+
     }
 }

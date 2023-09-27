@@ -41,6 +41,9 @@ public class PlayerGroundDetector : MonoBehaviour, IGrounded
         {
             OnGrounded?.Invoke();
         }
+
+        //Debug.DrawRay(_groundCheck.position, Vector3.down * _groundCheckRadius, Color.green);
+
     }
 
     private void OnDrawGizmosSelected()
